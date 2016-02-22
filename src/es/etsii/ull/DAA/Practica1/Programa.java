@@ -9,8 +9,7 @@ public class Programa {
 	private ArrayList<Instruccion> programa;
 	private int pc;
 	private ArrayList<Tag> etiquetas;
-	public static enum set1 { IMMEDIATE, DIRECT, POINTER, TAGJUMP }
-	public static enum set2 { LOAD, STORE, ADD, SUB, MULT, DIV, READ, WRITE, JUMP, JGTZ, JZERO, HALT }
+
 	public Programa() {
 		pc = 0;
 	}
