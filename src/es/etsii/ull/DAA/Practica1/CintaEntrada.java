@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class CintaEntrada extends Cinta {
 	
 	Cinta cintaEntrada;
-	File nombreFichero;
+	String nombreFichero;
 	
 	public CintaEntrada() {
 		cintaEntrada = new Cinta();
@@ -41,5 +41,9 @@ public class CintaEntrada extends Cinta {
 				System.out.println("Mensaje 2: " + ex2.getMessage());
 			}
 		}
+	}
+	public void setNombreFichero(String archivoEntrada) {
+		// TODO Auto-generated method stub
+		this.nombreFichero = archivoEntrada;
 	}
 }

@@ -193,114 +193,106 @@ public class MaquinaRam {
 		registros.clear();
 		registros.add(0);
 	}
-	void leer_codigo(File nombreArchivo, File archivoEntrada, File archivoSalida) {
+	public void leer_codigo(String nombreArchivo, String archivoEntrada) {
 		Vector<String> vIns = new Vector<String>();
-		Scanner scan = null;
-		String aux = "";
-		char[] reader = new char[100];
-		int comentario,simboloEtiqueta,primerEspacio,primerNoEspacio;
 		Vector<Tag> etiquetas = new Vector<Tag>();
 		Tag tag = null;
 		Vector<Instruccion> coded = new Vector<Instruccion>();
 		Instruccion dummy = null;
-		boolean error = false;
-
-
-		// Fichero del que queremos leer
-		File fichero = new File("fichero_leer.txt");
+		File fichero = new File(nombreArchivo);
 		Scanner s = null;
-
-
 
 		try {
 			// Leemos el contenido del fichero
-			System.out.println("... Leemos el contenido del fichero ...");
-			s = new Scanner(nombreArchivo);
+			System.out.println("... Leemos el contenido del fichero ..." + fichero.getAbsolutePath());
+			s = new Scanner(fichero);
 
-			// Leemos linea a linea el fichero
 			while (s.hasNextLine()) {
 				String linea = s.nextLine(); 	// Guardamos la linea en un String
 				if (linea.contains(";") == false) {
 					vIns.add(linea);	// Guardamos las instrucciones
 				}
 			}
+			System.out.println(vIns.size());
+			String palabra,subpalabra;
+			StringTokenizer elementos, subelementos;
+			Vector<String> cadenaTokenizada = new Vector<String>();
+			// Para cada instrucción (linea del fichero) tokenizar
+			for (int j = 0; j < vIns.size(); j++) {
+				elementos = new StringTokenizer(vIns.get(j));
+				while (elementos.hasMoreTokens()) {
+					palabra = elementos.nextToken();
+					subelementos = new StringTokenizer(palabra, ":");
+					while (subelementos.hasMoreTokens()) {
+						subpalabra = subelementos.nextToken();
+						cadenaTokenizada.add(subpalabra);
+					}
+				}
+			}
+			int j = 0;
+			for (int i = 0; i < cadenaTokenizada.size(); i++) {
+				System.out.println("token " + i + " : " + cadenaTokenizada.get(i));
+				//busca etiqueta
+				if (cadenaTokenizada.get(i).contains("[a-z]") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es una etiqueta.");
+					//tag = new Tag(cadenaTokenizada.get(i), i);
+				} else if (cadenaTokenizada.get(i).contains("LOAD") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
 
+				} else if (cadenaTokenizada.get(i).contains("STORE") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("ADD") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("SUB") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("MULT") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("DIV") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("READ") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("WRITE") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("JUMP") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+					
+				} else if (cadenaTokenizada.get(i).contains("JGTZ") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("JZERO") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("HALT") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un opcode");
+
+				} else if (cadenaTokenizada.get(i).contains("=") == true) {
+					System.out.println(cadenaTokenizada.get(i) + " es un IMMEDIATE");
+
+				} else if (cadenaTokenizada.get(i).contains("=") == true) {
+
+					System.out.println(cadenaTokenizada.get(i) + " es un POINTER");
+				} else if (cadenaTokenizada.get(i).contains("[0-9]") == true) {
+
+					System.out.println(cadenaTokenizada.get(i) + " es un registro");
+				}
+				else {
+					System.out.println("No se reconoce la instrucción");
+				}
+			}
 		} catch (Exception ex) {
-			System.out.println("Mensaje: " + ex.getMessage());
-		} finally {
-			// Cerramos el fichero tanto si la lectura ha sido correcta o no
-			try {
-				if (s != null)
-					s.close();
-			} catch (Exception ex2) {
-				System.out.println("Mensaje 2: " + ex2.getMessage());
-			}
+			System.out.println("Mensaje en leer: " + ex.getMessage());
 		}
-		String linea,palabra,subpalabra;
-		StringTokenizer elementos, subelementos;
-		Vector<String> cadenaTokenizada = new Vector<String>();
-		for (int j = 0; j < vIns.size(); j++) {
-			elementos = new StringTokenizer(vIns.get(j));
-			while (elementos.hasMoreTokens()) {
-				palabra = elementos.nextToken();
-				subelementos = new StringTokenizer(palabra, "=");
-				while (subelementos.hasMoreTokens()) {
-					subpalabra = subelementos.nextToken();
-					cadenaTokenizada.add(subpalabra);
-				}
-			}
-			if (cadenaTokenizada.contains("LOAD") == true) {
-				dummy.opcode = 0;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("STORE") == true) {
-				dummy.opcode = 1;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("ADD") == true) {
-				dummy.opcode = 2;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("SUB") == true) {
-				dummy.opcode = 3;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("MULT") == true) {
-				dummy.opcode = 4;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("DIV") == true) {
-				dummy.opcode = 5;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("READ") == true) {
-				dummy.opcode = 6;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("WRITE") == true) {
-				dummy.opcode = 7;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("JUMP") == true) {
-				dummy.opcode = 8;
-				dummy.tipo = 4;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("JGTZ") == true) {
-				dummy.opcode = 9;
-				dummy.tipo = 4;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("JZERO") == true) {
-				dummy.opcode = 10;
-				dummy.tipo = 4;
-				coded.addElement(dummy);
-			} else if (cadenaTokenizada.contains("HALT") == true) {
-				dummy.opcode = 0;
-				coded.addElement(dummy);
-			} else {
-				System.out.println("No se reconoce la instrucción");
-			}
-			if (coded.get(j).opcode == 11) {
-				if (vIns.get(j) != "HALT") {
-					System.out.println("error en la instruccion");
-				}
-			} else if (coded.get(j).tipo == 4) {
-				
-			}
-			
-		}
-
+		programa.setPrograma(coded, etiquetas);
+		entrada.setNombreFichero(archivoEntrada);	
+		entrada.leerFichero();
+		salida.escribirFichero();
 	}
 	void run(boolean traza) throws MiExcepcion {
 		Instruccion ins = null;
@@ -421,10 +413,7 @@ public class MaquinaRam {
 		BufferedReader br = new BufferedReader(in);
 		try {
 			System.out.println("Iniciando la máquina ...");
-			File archivo = new File(args[0]);
-			File entrada = new File(args[1]);
-			File salida = new File(args[2]);
-			Maquina.leer_codigo(archivo, entrada, salida);
+			Maquina.leer_codigo(args[0], args[1]);
 		} catch (Exception e) {
 			System.out.println("Error, no es posible inicializar la maquina");
 		}

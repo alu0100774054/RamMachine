@@ -1,14 +1,15 @@
 package es.etsii.ull.DAA.Practica1;
 
 import java.util.ArrayList;
+import java.util.Vector;
 import java.io.IOException;
 import java.lang.Enum;
 
 
 public class Programa {
-	private ArrayList<Instruccion> programa;
+	private Vector<Instruccion> programa;
 	private int pc;
-	private ArrayList<Tag> etiquetas;
+	private Vector<Tag> etiquetas;
 
 	public Programa() {
 		pc = 0;
@@ -30,12 +31,12 @@ public class Programa {
 		}
 		throw new MiExcepcion("error en getNombreEtiqueta");
 	}
-	public ArrayList<Instruccion> getPrograma() {
+	public Vector<Instruccion> getPrograma() {
 		return programa;
 	}
-	public void setPrograma(ArrayList<Instruccion> programa, ArrayList<Tag> etiquetas) {
-		this.programa = programa;
-		this.etiquetas = etiquetas;
+	public void setPrograma(Vector<Instruccion> coded, Vector<Tag> etiquetas2) {
+		this.programa = coded;
+		this.etiquetas = etiquetas2;
 	}
 
 }
