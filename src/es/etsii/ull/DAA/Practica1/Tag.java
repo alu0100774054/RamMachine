@@ -1,8 +1,13 @@
 package es.etsii.ull.DAA.Practica1;
-
+/**
+ * Implmenta una etiqueta, es capaz de almacenar su nombre y la linea en la que se encuentra.
+ * @author erikbarretodevera
+ *
+ */
 public class Tag {
-	private String tag;
-	private int linea;
+	private String tag;	// etiqueta
+	private int linea;	// linea donde se encuentra la etiqueta
+	
 	public Tag(String tag) {
 		this.tag = tag;
 	}

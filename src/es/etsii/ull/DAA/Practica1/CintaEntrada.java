@@ -2,11 +2,15 @@ package es.etsii.ull.DAA.Practica1;
 
 import java.io.File;
 import java.util.Scanner;
-
+/**
+ * Hereda de Cinta e implementa una cinta que almacena los datos de entrada del fichero.
+ * @author erikbarretodevera
+ *
+ */
 public class CintaEntrada extends Cinta {
 	
-	Cinta cintaEntrada;
-	String nombreFichero;
+	Cinta cintaEntrada;	// cinta de entrada
+	String nombreFichero;	// fichero donde esta la entrada
 	
 	public CintaEntrada() {
 		cintaEntrada = new Cinta();

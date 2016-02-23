@@ -5,7 +5,12 @@ import java.util.Vector;
 import java.io.IOException;
 import java.lang.Enum;
 
-
+/**
+ * Estructura que contiene un conjunto de instrucciones un contador de programa
+ * y guarda las etiquetas del programa
+ * @author erikbarretodevera
+ *
+ */
 public class Programa {
 	private Vector<Instruccion> programa;
 	private int pc;

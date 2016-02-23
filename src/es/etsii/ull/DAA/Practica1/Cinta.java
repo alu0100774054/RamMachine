@@ -1,7 +1,11 @@
 package es.etsii.ull.DAA.Practica1;
 
 import java.util.ArrayList;
-
+/**
+ * Estructura que almacena los valores en la cinta.
+ * @author erikbarretodevera
+ *
+ */
 public class Cinta {
 	
 	ArrayList<Integer> cinta;	// Cinta de la máquina
