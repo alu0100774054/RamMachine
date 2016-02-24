@@ -1,0 +1,39 @@
+;Programa que calcula n^n
+;pseudocódigo:
+;
+;leer(n)
+;si n es < 0
+;  escribir(0)
+;si n es == 0 estamos en caso base
+;  escribir(1)
+;si no
+;  x=n(guardar en un registro)
+;  cont=n-1
+;  while(cont>0)
+;    x=x*n
+;    cont=cont--;
+;  fin_while
+;  escribir(x)
+;fin_condicion
+
+            READ 1
+            LOAD 1
+            JGTZ else
+            WRITE =0
+            JUMP fin
+else :      LOAD 1
+            STORE 2
+            LOAD 1
+            STORE 3
+while :     LOAD 3
+            JGTZ bucle
+            JUMP fin_while
+bucle :     LOAD 2
+            MUL 1
+            STORE 2
+            LOAD 3
+            SUB =1
+            STORE 3
+            JUMP while
+fin_while : WRITE 2
+fin :       HALT
